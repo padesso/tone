@@ -30,4 +30,4 @@ This project combines a WebGL-based audio visualization with a dynamic, interact
    
 3. Run:
    ```bash
-   npx vite
+   npm run dev
