@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js Visualization</title>
+    <title>Tone.js and Three.js Chaos Pad Toy</title>
     <style>
         body {
             margin: 0;
@@ -13,6 +13,8 @@
             align-items: center;
             height: 100vh;
             background-color: #333333;
+            color: white;
+            font-family: Arial, sans-serif;
         }
 
         canvas {
@@ -22,16 +24,25 @@
         .controls {
             margin-bottom: 10px;
         }
+
+        .description {
+            margin-bottom: 20px;
+            text-align: center;
+        }
     </style>
-    <!-- Add this to your HTML file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
 </head>
 <body>
+    <div class="description">
+        <h2>Three.js and Tone.js Visualization</h2>
+        <p>Use the top row of letters (QWERTYUIOP) to play natural notes and numbers (1234567890) to play sharps/flats. Move the mouse to adjust the effects.</p>
+    </div>
     <div class="controls">
+        <label for="effect1">Effect 1:</label>
         <select id="effect1"></select>
+        <label for="effect2">Effect 2:</label>
         <select id="effect2"></select>
     </div>
-    <!-- Mark the script as a module -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
