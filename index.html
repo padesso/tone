@@ -3,63 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Visualizer</title>
+    <title>Three.js Visualization</title>
     <style>
-        body { margin: 0; overflow: hidden; }
-        canvas { display: block; }
-        #controls {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+        body {
+            margin: 0;
             display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-        .button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        .button:active {
-            background: #555;
-        }
-        #keyboard {
-            display: flex;
-        }
-        .key {
-            width: 30px;
-            height: 100px;
-            margin: 2px;
-            background: white;
-            border: 1px solid #000;
-            cursor: pointer;
-            display: flex;
-            align-items: flex-end;
+            flex-direction: column;
             justify-content: center;
-            font-size: 12px;
+            align-items: center;
+            height: 100vh;
+            background-color: #333333;
         }
-        .key.black {
-            height: 70px;
-            width: 20px;
-            background: black;
-            color: white;
-            margin: 2px -10px;
-            z-index: 2;
-            position: relative;
+
+        canvas {
+            display: block;
+        }
+
+        .controls {
+            margin-bottom: 10px;
         }
     </style>
+    <!-- Add this to your HTML file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
 </head>
 <body>
-    <div id="controls">
-        <button id="octave-down" class="button">Octave -</button>
-        <div id="keyboard"></div>
-        <button id="octave-up" class="button">Octave +</button>
+    <div class="controls">
+        <select id="effect1"></select>
+        <select id="effect2"></select>
     </div>
-    <script type="module" src="./app.js"></script>
+    <!-- Mark the script as a module -->
+    <script type="module" src="app.js"></script>
 </body>
 </html>
