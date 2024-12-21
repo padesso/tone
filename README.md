@@ -1,4 +1,4 @@
-# Audio Visualization and Synthesizer
+# Audio Visualization Effects Processor
 
 This project combines a WebGL-based audio visualization with an interactive effects pad. The audio and visualization are driven by **Tone.js** and **Three.js**.
 
