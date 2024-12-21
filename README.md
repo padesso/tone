@@ -1,13 +1,6 @@
 # Audio Visualization and Synthesizer
 
-This project combines a WebGL-based audio visualization with a dynamic, interactive keyboard. The audio visualization is driven by **Tone.js** and **Three.js**, providing real-time feedback based on audio frequencies. The keyboard features a one-octave range, with buttons to shift octaves up and down, and uses a polyphonic synthesizer for audio playback.
-
-## Features
-
-- **Audio Visualization**: Real-time frequency visualization using shaders.
-- **Interactive Keyboard**: One-octave keyboard with clickable notes.
-- **Octave Control**: Buttons to shift octaves up or down.
-- **Polyphonic Synthesizer**: Play multiple notes simultaneously with a smooth release.
+This project combines a WebGL-based audio visualization with an interactive effects pad. The audio and visualization are driven by **Tone.js** and **Three.js**.
 
 ---
 
