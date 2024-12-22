@@ -148,6 +148,7 @@ async function init() {
             const release = parseFloat(document.getElementById('release').value);
 
             synth.set({
+                volume: -12, // Lower the volume to reduce clipping
                 envelope: {
                     attack: attack,
                     decay: decay,
