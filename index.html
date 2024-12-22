@@ -15,19 +15,34 @@
             background-color: #333333;
             color: white;
             font-family: Arial, sans-serif;
+            position: relative;
         }
 
         canvas {
             display: block;
         }
 
-        .controls {
-            margin-bottom: 10px;
-        }
-
         .description {
             margin-bottom: 20px;
             text-align: center;
+        }
+
+        .effect1, .effect2 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .effect1 {
+            left: 20px;
+        }
+
+        .effect2 {
+            right: 20px;
+        }
+
+        .parameters {
+            margin-top: 10px;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
@@ -38,11 +53,19 @@
         <p>Use the top row of letters (QWERTYUIOP) to play natural notes and numbers (1234567890) to play sharps/flats.</p>
         <p>Dragging along the x axis controls the wetness of effect 1 and dragging along the y axis controls the wetness of effect 2.</p>
     </div>
-    <div class="controls">
+    <div class="effect1">
         <label for="effect1">Effect 1:</label>
-        <select id="effect1"></select>
+        <select id="effect1">
+            <option value="None">None</option>
+        </select>
+        <div id="effect1-parameters" class="parameters"></div>
+    </div>
+    <div class="effect2">
         <label for="effect2">Effect 2:</label>
-        <select id="effect2"></select>
+        <select id="effect2">
+            <option value="None">None</option>
+        </select>
+        <div id="effect2-parameters" class="parameters"></div>
     </div>
     <script type="module" src="app.js"></script>
 </body>

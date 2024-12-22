@@ -78,12 +78,16 @@ async function init() {
             const clampedMouseX = Math.max(0, Math.min(1, mouseX));
             const clampedMouseY = Math.max(0, Math.min(1, mouseY));
 
-            // Update effect parameters based on mouse position
-            if (effect1) {
-                effect1.set({ wet: clampedMouseX });
-            }
-            if (effect2) {
-                effect2.set({ wet: clampedMouseY });
+            // Update effect parameters based on mouse position only if mouse is down
+            if (uniforms.u_mouseDown.value) {
+                if (effect1) {
+                    effect1.set({ wet: clampedMouseX });
+                    document.querySelector('#effect1-parameters input[data-param="wet"]').value = clampedMouseX;
+                }
+                if (effect2) {
+                    effect2.set({ wet: clampedMouseY });
+                    document.querySelector('#effect2-parameters input[data-param="wet"]').value = clampedMouseY;
+                }
             }
         }
 
@@ -130,8 +134,22 @@ async function init() {
         animate();
 
         // ---- 6. TONE.JS INTEGRATION ----
-        // Create a polysynth and connect it to the master output (speakers)
-        const synth = new Tone.PolySynth().toDestination();
+        // Create a limiter to prevent clipping
+        const limiter = new Tone.Limiter(-12).toDestination();
+
+        // Create a polysynth and connect it to the limiter
+        const synth = new Tone.PolySynth(Tone.Synth, {
+            oscillator: {
+                type: 'sine'
+            },
+            envelope: {
+                attack: 0.1,
+                decay: 0.2,
+                sustain: 0.5,
+                release: 1.5
+            },
+            volume: -12 // Lower the volume to prevent clipping
+        }).connect(limiter);
 
         // Map keyboard keys to musical notes
         const keyToNote = {
@@ -176,7 +194,7 @@ async function init() {
 
         // ---- 7. POPULATE DROPDOWN BOXES WITH TONE.JS EFFECTS ----
         const effects = [
-            'AutoFilter', 'AutoPanner', 'AutoWah', 'BitCrusher', 'Chorus', 'Distortion', 'FeedbackDelay', 'Freeverb', 'JCReverb', 'Phaser', 'PingPongDelay', 'PitchShift', 'Reverb', 'StereoWidener', 'Tremolo', 'Vibrato'
+            'None', 'AutoFilter', 'AutoPanner', 'AutoWah', 'BitCrusher', 'Chorus', 'Distortion', 'FeedbackDelay', 'Freeverb', 'JCReverb', 'Phaser', 'PingPongDelay', 'PitchShift', 'Reverb', 'StereoWidener', 'Tremolo', 'Vibrato'
         ];
 
         const effect1Dropdown = document.getElementById('effect1');
@@ -197,24 +215,60 @@ async function init() {
         let effect1 = null;
         let effect2 = null;
 
+        // Function to create parameter controls
+        function createParameterControls(effect, container) {
+            container.innerHTML = ''; // Clear previous controls
+            if (effect === 'None') return; // No parameters for 'None'
+            Object.keys(effect).forEach(param => {
+                if (typeof effect[param] === 'object' && effect[param].value !== undefined) {
+                    const control = document.createElement('div');
+                    control.innerHTML = `
+                        <label>${param}: <input type="range" min="0" max="1" step="0.01" value="${effect[param].value}" data-param="${param}"></label>
+                    `;
+                    control.querySelector('input').addEventListener('input', (e) => {
+                        effect[param].value = parseFloat(e.target.value);
+                    });
+                    container.appendChild(control);
+                }
+            });
+        }
+
         // Add event listeners to update effects based on dropdown selection
         effect1Dropdown.addEventListener('change', () => {
             if (effect1) {
+                synth.disconnect(effect1);
                 effect1.dispose();
             }
             const selectedEffect = effect1Dropdown.value;
-            effect1 = new Tone[selectedEffect]().toDestination();
-            synth.connect(effect1);
+            if (selectedEffect === 'None') {
+                effect1 = null;
+                document.getElementById('effect1-parameters').innerHTML = '';
+            } else {
+                effect1 = new Tone[selectedEffect]().toDestination();
+                synth.connect(effect1);
+                createParameterControls(effect1, document.getElementById('effect1-parameters'));
+            }
         });
 
         effect2Dropdown.addEventListener('change', () => {
             if (effect2) {
+                synth.disconnect(effect2);
                 effect2.dispose();
             }
             const selectedEffect = effect2Dropdown.value;
-            effect2 = new Tone[selectedEffect]().toDestination();
-            synth.connect(effect2);
+            if (selectedEffect === 'None') {
+                effect2 = null;
+                document.getElementById('effect2-parameters').innerHTML = '';
+            } else {
+                effect2 = new Tone[selectedEffect]().toDestination();
+                synth.connect(effect2);
+                createParameterControls(effect2, document.getElementById('effect2-parameters'));
+            }
         });
+
+        // Trigger change events to initialize parameter panels for default selections
+        effect1Dropdown.dispatchEvent(new Event('change'));
+        effect2Dropdown.dispatchEvent(new Event('change'));
     } catch (error) {
         console.error('Error initializing the scene:', error);
     }
