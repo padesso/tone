@@ -1,14 +1,19 @@
-# Audio Visualization Effects Processor
+# Synthesizer Effects Pad
 
-This project combines a WebGL-based audio visualization with an interactive effects pad. The audio and visualization are driven by **Tone.js** and **Three.js**.
+This project is a web-based application that uses Tone.js for audio synthesis and Three.js for 3D graphics. The application allows users to play natural notes and sharps/flats using the top row of letters and numbers on the keyboard. Users can also control the wetness of two effects by dragging along the x-axis and y-axis.
 
----
+## Features
 
-## Prerequisites
+- Play natural notes and sharps/flats using the keyboard
+- Control the wetness of two effects by dragging along the x-axis and y-axis
+- Customize the synth parameters including wave type, attack, decay, sustain, release, and volume
+- Visualize the effects using Three.js
 
-- **Node.js**: Ensure Node.js is installed on your system. [Download Node.js](https://nodejs.org/)
+## Dependencies
 
----
+- [Tone.js](https://tonejs.github.io/)
+- [Three.js](https://threejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Installation
 
@@ -16,7 +21,6 @@ This project combines a WebGL-based audio visualization with an interactive effe
    ```bash
    git clone https://github.com/padesso/tone
    cd tone
-
 2. Install Depdendencies:
    ```bash
    npm install
