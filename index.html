@@ -4,64 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tone.js and Three.js Effects Pad</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
 </head>
-<body>
-    <div class="description">
+<body class="bg-gray-900 text-white">
+    <div class="description p-4">
         <p>Use the top row of letters (QWERTYUIOP) to play natural notes and numbers (1234567890) to play sharps/flats.</p>
         <p>Dragging along the x-axis controls the wetness of Effect 1 and dragging along the y-axis controls the wetness of Effect 2.</p>
     </div>
-    <div class="controls-container">
-        <div class="control polysynth">
-            <label for="polysynth">Polysynth:</label>
-            <div id="polysynth-parameters" class="parameters">
-                <div class="parameter">
-                    <label for="waveType">Wave Type:</label>
-                    <select id="waveType" name="waveType">
-                        <option value="sine">Sine</option>
-                        <option value="square">Square</option>
-                        <option value="triangle">Triangle</option>
-                        <option value="sawtooth">Sawtooth</option>
-                    </select>
-                </div>
-                <div class="parameter">
-                    <label for="attack">Attack:</label>
-                    <input type="range" id="attack" name="attack" min="0" max="1" step="0.01">
-                </div>
-                <div class="parameter">
-                    <label for="decay">Decay:</label>
-                    <input type="range" id="decay" name="decay" min="0" max="1" step="0.01">
-                </div>
-                <div class="parameter">
-                    <label for="sustain">Sustain:</label>
-                    <input type="range" id="sustain" name="sustain" min="0" max="1" step="0.01">
-                </div>
-                <div class="parameter">
-                    <label for="release">Release:</label>
-                    <input type="range" id="release" name="release" min="0" max="1" step="0.01">
-                </div>
-                <div class="parameter">
-                    <label for="volume">Volume:</label>
-                    <input type="range" id="volume" name="volume" min="-60" max="0" step="1">
+    <div class="flex p-4 space-x-4 h-screen">
+        <!-- Synth Controls -->
+        <div class="controls-container w-1/6 p-4 bg-gray-800 rounded">
+            <div class="control polysynth mb-4">
+                <label for="polysynth" class="block text-lg font-bold mb-2">Polysynth:</label>
+                <div id="polysynth-parameters" class="parameters space-y-4">
+                    <div class="parameter">
+                        <label for="waveType" class="block mb-1">Wave Type:</label>
+                        <select id="waveType" name="waveType" class="w-full p-2 bg-gray-800 border border-gray-700 rounded">
+                            <option value="sine">Sine</option>
+                            <option value="square">Square</option>
+                            <option value="triangle">Triangle</option>
+                            <option value="sawtooth">Sawtooth</option>
+                        </select>
+                    </div>
+                    <div class="parameter">
+                        <label for="attack" class="block mb-1">Attack:</label>
+                        <input type="range" id="attack" name="attack" min="0" max="1" step="0.01" class="w-full">
+                    </div>
+                    <div class="parameter">
+                        <label for="decay" class="block mb-1">Decay:</label>
+                        <input type="range" id="decay" name="decay" min="0" max="1" step="0.01" class="w-full">
+                    </div>
+                    <div class="parameter">
+                        <label for="sustain" class="block mb-1">Sustain:</label>
+                        <input type="range" id="sustain" name="sustain" min="0" max="1" step="0.01" class="w-full">
+                    </div>
+                    <div class="parameter">
+                        <label for="release" class="block mb-1">Release:</label>
+                        <input type="range" id="release" name="release" min="0" max="1" step="0.01" class="w-full">
+                    </div>
+                    <div class="parameter">
+                        <label for="volume" class="block mb-1">Volume:</label>
+                        <input type="range" id="volume" name="volume" min="-60" max="0" step="1" class="w-full">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="effects-container">
-        <div class="effect">
-            <label for="effect1">Effect 1:</label>
-            <select id="effect1">
-                <option value="None">None</option>
-            </select>
-            <div id="effect1-parameters" class="parameters"></div>
+        <!-- Effects Pad -->
+        <div class="effects-pad w-2/3 p-4 bg-gray-800 rounded flex items-center justify-center">
+            <!-- Three.js app content here -->
+            <div id="threejs-app" class="w-full h-full"></div>
         </div>
-        <div class="effect">
-            <label for="effect2">Effect 2:</label>
-            <select id="effect2">
-                <option value="None">None</option>
-            </select>
-            <div id="effect2-parameters" class="parameters"></div>
+        <!-- Effects Controls -->
+        <div class="effects-container w-1/6 p-4 bg-gray-800 rounded">
+            <div class="effect mb-4">
+                <label for="effect1" class="block text-lg font-bold mb-2">Effect 1:</label>
+                <select id="effect1" class="w-full p-2 bg-gray-800 border border-gray-700 rounded">
+                    <option value="None">None</option>
+                </select>
+                <div id="effect1-parameters" class="parameters"></div>
+            </div>
+            <div class="effect mb-4">
+                <label for="effect2" class="block text-lg font-bold mb-2">Effect 2:</label>
+                <select id="effect2" class="w-full p-2 bg-gray-800 border border-gray-700 rounded">
+                    <option value="None">None</option>
+                </select>
+                <div id="effect2-parameters" class="parameters"></div>
+            </div>
         </div>
     </div>
     <script type="module" src="app.js"></script>

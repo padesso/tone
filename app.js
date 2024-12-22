@@ -22,8 +22,8 @@ async function init() {
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setClearColor(0x000000, 1); // Ensure the renderer background is black
-        document.body.appendChild(renderer.domElement);
-
+        document.getElementById('threejs-app').appendChild(renderer.domElement);
+        
         const canvas = renderer.domElement;
         const SQUARE_SIZE = Math.min(window.innerWidth, window.innerHeight) * 0.8;
         renderer.setSize(SQUARE_SIZE, SQUARE_SIZE);
