@@ -137,19 +137,48 @@ async function init() {
         // Create a limiter to prevent clipping
         const limiter = new Tone.Limiter(-12).toDestination();
 
-        // Create a polysynth and connect it to the limiter
-        const synth = new Tone.PolySynth(Tone.Synth, {
-            oscillator: {
-                type: 'sine'
-            },
-            envelope: {
-                attack: 0.1,
-                decay: 0.2,
-                sustain: 0.5,
-                release: 1.5
-            },
-            volume: -12 // Lower the volume to prevent clipping
-        }).connect(limiter);
+        // Initialize the synth and envelope
+        const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+
+        // Function to update the synth's envelope
+        function updateEnvelope() {
+            const attack = parseFloat(document.getElementById('attack').value);
+            const decay = parseFloat(document.getElementById('decay').value);
+            const sustain = parseFloat(document.getElementById('sustain').value);
+            const release = parseFloat(document.getElementById('release').value);
+
+            synth.set({
+                envelope: {
+                    attack: attack,
+                    decay: decay,
+                    sustain: sustain,
+                    release: release
+                }
+            });
+        }
+
+        // Function to update the synth's wave type
+        function updateWaveType() {
+            const waveType = document.getElementById('waveType').value;
+            synth.set({
+                oscillator: {
+                    type: waveType
+                }
+            });
+        }
+
+        // Add event listeners to the envelope controls
+        document.getElementById('attack').addEventListener('input', updateEnvelope);
+        document.getElementById('decay').addEventListener('input', updateEnvelope);
+        document.getElementById('sustain').addEventListener('input', updateEnvelope);
+        document.getElementById('release').addEventListener('input', updateEnvelope);
+
+        // Add event listener to the wave type control
+        document.getElementById('waveType').addEventListener('change', updateWaveType);
+
+        // Initialize the envelope and wave type with default values
+        updateEnvelope();
+        updateWaveType();
 
         // Map keyboard keys to musical notes
         const keyToNote = {

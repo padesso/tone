@@ -27,22 +27,40 @@
             text-align: center;
         }
 
-        .effect1, .effect2 {
+        .controls-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             position: absolute;
-            top: 50%;
+            top: 20%;
+            left: 20px;
             transform: translateY(-50%);
         }
 
-        .effect1 {
+        .effects-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: absolute;
+            top: 50%;
             left: 20px;
+            transform: translateY(-50%);
         }
 
-        .effect2 {
-            right: 20px;
+        .control, .effect {
+            border: 1px solid white;
+            padding: 10px;
+            margin-bottom: 10px;
         }
 
         .parameters {
             margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .parameter {
+            margin-bottom: 5px;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
@@ -53,19 +71,53 @@
         <p>Use the top row of letters (QWERTYUIOP) to play natural notes and numbers (1234567890) to play sharps/flats.</p>
         <p>Dragging along the x axis controls the wetness of effect 1 and dragging along the y axis controls the wetness of effect 2.</p>
     </div>
-    <div class="effect1">
-        <label for="effect1">Effect 1:</label>
-        <select id="effect1">
-            <option value="None">None</option>
-        </select>
-        <div id="effect1-parameters" class="parameters"></div>
+    <div class="controls-container">
+        <div class="control polysynth">
+            <label for="polysynth">Polysynth:</label>
+            <div id="polysynth-parameters" class="parameters">
+                <div class="parameter">
+                    <label for="waveType">Wave Type:</label>
+                    <select id="waveType" name="waveType">
+                        <option value="sine">Sine</option>
+                        <option value="square">Square</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="sawtooth">Sawtooth</option>
+                    </select>
+                </div>
+                <div class="parameter">
+                    <label for="attack">Attack:</label>
+                    <input type="range" id="attack" name="attack" min="0" max="1" step="0.01">
+                </div>
+                <div class="parameter">
+                    <label for="decay">Decay:</label>
+                    <input type="range" id="decay" name="decay" min="0" max="1" step="0.01">
+                </div>
+                <div class="parameter">
+                    <label for="sustain">Sustain:</label>
+                    <input type="range" id="sustain" name="sustain" min="0" max="1" step="0.01">
+                </div>
+                <div class="parameter">
+                    <label for="release">Release:</label>
+                    <input type="range" id="release" name="release" min="0" max="1" step="0.01">
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="effect2">
-        <label for="effect2">Effect 2:</label>
-        <select id="effect2">
-            <option value="None">None</option>
-        </select>
-        <div id="effect2-parameters" class="parameters"></div>
+    <div class="effects-container">
+        <div class="effect">
+            <label for="effect1">Effect 1:</label>
+            <select id="effect1">
+                <option value="None">None</option>
+            </select>
+            <div id="effect1-parameters" class="parameters"></div>
+        </div>
+        <div class="effect">
+            <label for="effect2">Effect 2:</label>
+            <select id="effect2">
+                <option value="None">None</option>
+            </select>
+            <div id="effect2-parameters" class="parameters"></div>
+        </div>
     </div>
     <script type="module" src="app.js"></script>
 </body>
