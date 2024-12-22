@@ -25,6 +25,8 @@ This project combines a WebGL-based audio visualization with an interactive effe
    ```bash
    npm run dev
 
+---
+
 ## AI Contribution Disclosure
 
 This repository contains code that was partially generated with the assistance of AI tools. If you have questions or concerns about the AI-generated contributions, please feel free to raise an issue or contact me directly.
