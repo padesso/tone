@@ -168,6 +168,12 @@ async function init() {
             });
         }
 
+        // Function to update the synth's volume
+        function updateVolume() {
+            const volume = parseFloat(document.getElementById('volume').value);
+            synth.set({ volume: volume });
+        }
+
         // Add event listeners to the envelope controls
         document.getElementById('attack').addEventListener('input', updateEnvelope);
         document.getElementById('decay').addEventListener('input', updateEnvelope);
@@ -177,9 +183,16 @@ async function init() {
         // Add event listener to the wave type control
         document.getElementById('waveType').addEventListener('change', updateWaveType);
 
+        // Add event listener to the volume control
+        document.getElementById('volume').addEventListener('input', updateVolume);
+
         // Initialize the envelope and wave type with default values
         updateEnvelope();
         updateWaveType();
+
+        // Initialize the volume with a default value
+        document.getElementById('volume').value = -12; // Default volume
+        updateVolume();
 
         // Map keyboard keys to musical notes
         const keyToNote = {
