@@ -12,9 +12,9 @@
         <p>Use the top row of letters (QWERTYUIOP) to play natural notes and numbers (1234567890) to play sharps/flats.</p>
         <p>Dragging along the x-axis controls the wetness of Effect 1 and dragging along the y-axis controls the wetness of Effect 2.</p>
     </div>
-    <div class="flex p-4 space-x-4 h-screen">
+    <div class="flex p-4 space-x-4 h-4/5">
         <!-- Synth Controls -->
-        <div class="controls-container w-1/6 p-4 bg-gray-800 rounded">
+        <div class="controls-container w-1/4 p-4 bg-gray-800 rounded">
             <div class="control polysynth mb-4">
                 <label for="polysynth" class="block text-lg font-bold mb-2">Polysynth:</label>
                 <div id="polysynth-parameters" class="parameters space-y-4">
@@ -51,12 +51,12 @@
             </div>
         </div>
         <!-- Effects Pad -->
-        <div class="effects-pad w-2/3 p-4 bg-gray-800 rounded flex items-center justify-center">
+        <div class="effects-pad w-1/2 p-4 bg-gray-800 rounded flex items-center justify-center">
             <!-- Three.js app content here -->
-            <div id="threejs-app" class="w-full h-full"></div>
+            <div id="threejs-app" class="w-full h-full flex items-center justify-center"></div>
         </div>
         <!-- Effects Controls -->
-        <div class="effects-container w-1/6 p-4 bg-gray-800 rounded">
+        <div class="effects-container w-1/4 p-4 bg-gray-800 rounded">
             <div class="effect mb-4">
                 <label for="effect1" class="block text-lg font-bold mb-2">Effect 1:</label>
                 <select id="effect1" class="w-full p-2 bg-gray-800 border border-gray-700 rounded">
