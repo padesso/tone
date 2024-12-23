@@ -1,13 +1,13 @@
 # Synthesizer Effects Pad
 
-This project is a web-based application that uses Tone.js for audio synthesis and Three.js for 3D graphics. The application allows users to play natural notes and sharps/flats using the top row of letters and numbers on the keyboard. Users can also control the wetness of two effects by dragging along the x-axis and y-axis.
+This project uses Tone.js for audio synthesis and Three.js for graphics on the effects pad.  The layout uses Tailwind CSS. 
 
-## Features
+## Operation
 
 - Play natural notes and sharps/flats using the keyboard
-- Control the wetness of two effects by dragging along the x-axis and y-axis
+- Control the wetness of the effects by dragging along the x-axis and y-axis of the effects pad
 - Customize the synth parameters including wave type, attack, decay, sustain, release, and volume
-- Visualize the effects using Three.js
+- Some eye candy using when you click/drag
 
 ## Dependencies
 
